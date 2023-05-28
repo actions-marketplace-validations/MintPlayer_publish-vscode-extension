@@ -35,27 +35,20 @@ jobs:
       - name: Run Unit Tests
         run: npm run test
         
-      - name: get email
-        id: getemail
-        uses: evvanErb/get-github-email-by-username-action@v1.25
-        with:
-          github-username: ${{ github.actor }}
-          #token: ${{ github.token }}
-      
-      # - name: Try get tags
+      # - name: get email
+      #   id: getemail
+      #   uses: evvanErb/get-github-email-by-username-action@v1.25
+      #   with:
+      #     github-username: ${{ github.actor }}
+      #     #token: ${{ github.token }}
+
+      # - name: Update Major Tag
       #   run: |
-      #     git describe --tags --always
+      #     MAJOR_VERSION=$(git tag | grep -oP "\Kv[0-9]+" | tail -1)
+      #     git config user.name ${{ github.actor }}
+      #     git config user.email ${{ steps.getemail.outputs.email }}
+      #     git tag -afm "Updated tag $MAJOR_VERSION to $(git tag | grep -oP "\Kv[0-9]+" | tail -1)" $MAJOR_VERSION
+      #     git push --tags --force
 
-      # - name: Try get tags 2
-      #   run: |
-      #     git describe --tags --always | grep -oP "[0-9]+ \Kv"
-
-      - name: Update Major Tag
-        run: |
-          MAJOR_VERSION=$(git tag | grep -oP "\Kv[0-9]+" | tail -1)
-          git config user.name ${{ github.actor }}
-          git config user.email ${{ steps.getemail.outputs.email }}
-          git tag -afm "Updated tag $MAJOR_VERSION to $(git tag | grep -oP "\Kv[0-9]+" | tail -1)" $MAJOR_VERSION
-          git push --tags --force
-
+# Create a tag manually using the command line
 # Publish to Github Marketplace should be done from the homepage
