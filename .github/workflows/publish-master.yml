@@ -1,0 +1,61 @@
+name: Build, Lint, Test and Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-lint-test:
+    name: Node ${{ matrix.node }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - ubuntu-latest
+        node:
+          - 16
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v2
+      - name: Get tags
+        run: git fetch --tags origin
+      - name: Install Node ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run Linter
+        run: npm run lint
+      - name: Build Code
+        run: npm run build
+      - name: Run Unit Tests
+        run: npm run test
+        
+      - name: get email
+        id: getemail
+        uses: evvanErb/get-github-email-by-username-action@v1.25
+        with:
+          github-username: ${{ github.actor }}
+          #token: ${{ github.token }}
+      
+      # - name: Try get tags
+      #   run: |
+      #     git describe --tags --always
+
+      # - name: Try get tags 2
+      #   run: |
+      #     git describe --tags --always | grep -oP "[0-9]+ \Kv"
+
+      - name: Update Major Tag
+        run: |
+          MAJOR_VERSION=$(git tag | grep -oP "\Kv[0-9]+" | tail -1)
+          git config user.name ${{ github.actor }}
+          git config user.email ${{ steps.getemail.outputs.email }}
+          git tag -afm "Updated tag $MAJOR_VERSION to $(git tag | grep -oP "\Kv[0-9]+" | tail -1)" $MAJOR_VERSION
+          git push --tags --force
+
+# Publish to Github Marketplace should be done from the homepage

@@ -34,15 +34,17 @@ describe('publish', () => {
             yarn: false,
             noVerify: true,
             dependencies: true,
+            skipDuplicate: false
         });
 
         expect(publishVSIXStub).to.have.been.calledOnceWithExactly('myExtensionFile', {
             baseContentUrl: 'myBaseContentUrl',
-            baseImagesUrl: 'myBaseImageUrl',
-            pat: 'myPersonalAccessToken',
             useYarn: false,
+            pat: 'myPersonalAccessToken',
+            baseImagesUrl: 'myBaseImageUrl',
             noVerify: true,
             dependencies: true,
+            skipDuplicate: false
         });
     });
 

@@ -1,7 +1,7 @@
-name: 'Publish VS Code Extension'
+name: 'Publish VS Code Extension (MintPlayer)'
 description: 'Publish your VSCode extension to the VS Marketplace (using vsce) or the Open VSX Registry (using ovsx) with ease.'
 
-author: HaaLeo
+author: MintPlayer
 branding:
   color: blue
   icon: package
@@ -40,6 +40,10 @@ inputs:
     default: false
   noVerify:
     description: 'Allow publishing extensions to the visual studio marketplace which use a proposed API (enableProposedApi: true).'
+    required: false
+    default: false
+  skipDuplicate:
+    description: 'Dont throw an error when the package version is already present in the registry'
     required: false
     default: false
   preRelease:

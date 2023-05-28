@@ -1,11 +1,11 @@
 {
-  "name": "publish-vscode-extension",
-  "version": "1.3.0",
-  "description": "GitHub action to publish your VS Code Extension to the Open VSX Registry.",
+  "name": "@mintplayer/publish-vscode-extension",
+  "private": false,
+  "version": "1.0.0",
+  "description": "Github action to publish a VS Code extension to the Visual Studio MarketPlace",
   "main": "dist/index.js",
   "scripts": {
     "test": "nyc mocha 'out/test/**/*.test.js'",
-    "coverage": "nyc report --reporter=lcov",
     "build": "npm run build:ncc && npm run build:test",
     "build:ncc": "ncc build src/index.ts --source-map --no-source-map-register",
     "build:test": "tsc -p tsconfig.json",
@@ -13,35 +13,32 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HaaLeo/publish-vscode-extension.git"
+    "url": "https://github.com/MintPlayer/mintplayer-publish-vscode-extension"
   },
   "keywords": [
-    "github",
-    "action",
-    "open",
-    "vsx",
-    "vscode",
+    "github-action",
+    "npm",
     "publish",
-    "Visual Studio Code"
+    "vscode"
   ],
   "author": {
-    "name": "HaaLeo",
-    "url": "https://github.com/HaaLeo"
+    "name": "Pieterjan ",
+    "url": "https://github.com/PieterjanDeClippel"
   },
-  "license": "SEE LICENSE IN LICENSE.txt",
+  "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/HaaLeo/publish-vscode-extension/issues"
+    "url": "https://github.com/MintPlayer/mintplayer-publish-vscode-extension/issues"
   },
-  "homepage": "https://github.com/HaaLeo/publish-vscode-extension#readme",
+  "homepage": "https://github.com/MintPlayer/mintplayer-publish-vscode-extension#readme",
   "dependencies": {
     "@actions/core": "^1.10.0",
-    "@vscode/vsce": "^2.18.0",
+    "@vscode/vsce": "^2.19.0",
     "ovsx": "^0.8.0"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.0",
+    "@types/chai": "^4.3.5",
     "@types/chai-as-promised": "^7.1.4",
-    "@types/mocha": "^10.0.0",
+    "@types/mocha": "^10.0.1",
     "@types/node": "^16.11.26",
     "@types/sinon": "^10.0.6",
     "@types/sinon-chai": "^3.2.6",

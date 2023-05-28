@@ -37,6 +37,7 @@ function _convertToVSCECreateVSIXOptions(options: ActionOptions, targetVSIXPath:
 }
 
 async function _getPackageName(packagePath: string): Promise<string> {
+    // const rawJson = await fs.promises.readFile(path.resolve(path.join(packagePath, 'package.json')), 'utf8');
     const rawJson = await fs.promises.readFile(path.join(packagePath, 'package.json'), 'utf8');
     const json = JSON.parse(rawJson) as { name: string; version: string };
     if (!json.name || !json.version) {
