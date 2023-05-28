@@ -1,5 +1,6 @@
 # Dist
 dist
+!dist/index.js
 
 # Logs
 logs
